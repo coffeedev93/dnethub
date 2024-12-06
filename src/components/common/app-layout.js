@@ -5,9 +5,8 @@ import { IconGraph, IconHome, IconShip, IconUser, IconUserBolt, IconUserCode } f
 import Link from "next/link";
 
 const LinksBar = () => {
-    const protocol = window ? window.location.protocol : "http:"
-    const hostname = window ? window.location.hostname : "localhost"
-    const rootHost = hostname.includes("localhost") ? "localhost:3000" : process.env.NEXT_PUBLIC_ROOT_DOMAIN;
+    const protocol = process.env.NEXT_PUBLIC_ROOT_PROTOCOL;
+    const rootHost = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
 
     return (
         <div className="max-w-4xl mx-auto flex items-center gap-4 pt-4">
