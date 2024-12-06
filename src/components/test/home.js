@@ -14,14 +14,14 @@ const walletInfo = {
     nfts: 3,
   }
 
-export default function Home() {
+export default function Home({ title = "Landing" }) {
 
   return (
     <main className="flex-1 p-6 overflow-auto">
     <div className="max-w-4xl mx-auto">
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle className="text-2xl">Your Stats</CardTitle>
+          <CardTitle className="text-2xl">{title}</CardTitle>
           <CardDescription>Claim your Hedera profile</CardDescription>
         </CardHeader>
         <CardContent>

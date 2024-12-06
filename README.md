@@ -1,3 +1,3 @@
 # IM Hbar
 
-Show your on-chain profile
+Show your Web3 profile
