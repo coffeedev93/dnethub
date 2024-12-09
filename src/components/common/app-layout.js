@@ -23,7 +23,7 @@ const LinksBar = () => {
                 <IconGraph className="w-5 h-5" />
                 <span className="hidden sm:inline">Dashboard</span>
             </Link>
-            <Link href={`${protocol}://joedoe.${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
+            <Link href={`${protocol}://joedoe.${profileHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
                 <IconUserCode className="w-5 h-5" />
                 <span className="hidden sm:inline">Profile</span>
             </Link>
