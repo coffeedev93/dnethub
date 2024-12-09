@@ -7,7 +7,7 @@ export default function SubdomainPage({ params }) {
     const { domain } = params
     return (
         <AppLayout>
-            <Profile id={domain} />
+            <Profile id={decodeURIComponent(domain)} />
 		</AppLayout>
     );
 }

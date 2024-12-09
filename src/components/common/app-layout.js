@@ -10,19 +10,19 @@ const LinksBar = () => {
 
     return (
         <div className="max-w-4xl mx-auto flex items-center gap-4 pt-4">
-            <Link href={`${protocol}//${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
+            <Link href={`${protocol}://${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
                 <IconHome className="w-5 h-5" />
                 <span className="hidden sm:inline">Landing</span>
             </Link>
-            <Link href={`${protocol}//app.${rootHost}/onboard`} className="flex items-center space-x-1 text-foreground hover:text-primary">
+            <Link href={`${protocol}://app.${rootHost}/onboard`} className="flex items-center space-x-1 text-foreground hover:text-primary">
                 <IconShip className="w-5 h-5" />
                 <span className="hidden sm:inline">Onboard</span>
             </Link>
-            <Link href={`${protocol}//app.${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
+            <Link href={`${protocol}://app.${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
                 <IconGraph className="w-5 h-5" />
                 <span className="hidden sm:inline">Dashboard</span>
             </Link>
-            <Link href={`${protocol}//joedoe.${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
+            <Link href={`${protocol}://joedoe.${rootHost}`} className="flex items-center space-x-1 text-foreground hover:text-primary">
                 <IconUserCode className="w-5 h-5" />
                 <span className="hidden sm:inline">Profile</span>
             </Link>
