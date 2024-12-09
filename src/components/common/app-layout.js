@@ -7,6 +7,7 @@ import Link from "next/link";
 const LinksBar = () => {
     const protocol = process.env.NEXT_PUBLIC_ROOT_PROTOCOL;
     const rootHost = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
+    const profileHost = rootHost.includes("localhost") ? rootHost : "hbar.im";
 
     return (
         <div className="max-w-4xl mx-auto flex items-center gap-4 pt-4">
