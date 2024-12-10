@@ -1,13 +1,16 @@
 "use client"
 
 import { useApp } from "@/src/context";
-import { IconGraph, IconHome, IconShip, IconUser, IconUserBolt, IconUserCode } from "@tabler/icons-react";
+import { getUrlComponents } from "@/src/lib/myutils";
+import { IconGraph, IconHome, IconShip, IconUserCode } from "@tabler/icons-react";
 import Link from "next/link";
 
 const LinksBar = () => {
-    const protocol = process.env.NEXT_PUBLIC_ROOT_PROTOCOL;
-    const rootHost = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
-    const profileHost = rootHost.includes("localhost") ? rootHost : "hbar.im";
+    const {
+        protocol,
+        rootHost,
+        profileHost
+    } = getUrlComponents();
 
     return (
         <div className="max-w-4xl mx-auto flex items-center gap-4 pt-4">

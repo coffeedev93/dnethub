@@ -1,9 +1,21 @@
 export const fallbackNoImage = "/noimage.svg";
 export const cardThemeColors = "bg-white dark:bg-zinc-900";
 export const bodyThemeColors =
-    "bg-slate-200 text-gray-800 dark:bg-zinc-800 dark:text-zinc-100";
+    "bg-white text-gray-800 dark:bg-zinc-800 dark:text-zinc-100";
 export const formFieldStyle = 
     "w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline";
+
+export const getUrlComponents = () => {
+    const protocol = process.env.NEXT_PUBLIC_ROOT_PROTOCOL;
+    const rootHost = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
+    const profileHost = rootHost.includes("localhost") ? rootHost : "hbar.im";
+
+    return {
+        protocol,
+        rootHost,
+        profileHost
+    }
+}
 
 // gets an id string like the ones in Firebase
 export const pseudoRandId = () => {

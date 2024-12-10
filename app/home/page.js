@@ -1,11 +1,5 @@
-import AppLayout from "@/src/components/common/app-layout";
-import SectionCard from "@/src/components/test/section-card";
-
+import Landing from "@/src/components/landing";
 
 export default function HomePage() {
-    return (
-        <AppLayout>
-			<SectionCard title="Home & Landing"/>
-		</AppLayout>
-    );
+    return <Landing />
 }
