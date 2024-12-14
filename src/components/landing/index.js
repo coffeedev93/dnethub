@@ -6,6 +6,7 @@ import { cn } from "@/src/lib/utils";
 import LandingContent from "./content";
 import LandingNav from "./navbar";
 import LandingFooter from "./footer";
+import ParticlesCanvas from "./particles";
 
 const siteConfig = {
     name: "WebHub",
@@ -41,6 +42,7 @@ const marketingConfig = {
 export default function Landing({}) {
     return (
         <div className="flex min-h-screen flex-col">
+            <ParticlesCanvas />
             <header className="container z-40 bg-background">
                 <div className="flex h-20 items-center justify-between py-6">
                     <LandingNav
@@ -63,7 +65,7 @@ export default function Landing({}) {
                     </nav>
                 </div>
             </header>
-            <main className="flex-1">
+            <main className="flex-1 z-10">
                 <LandingContent siteConfig={siteConfig} />
             </main>
             <LandingFooter siteConfig={siteConfig} />

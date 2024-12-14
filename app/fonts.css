@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@700&display=swap');
 
 .dapp-title {
-    font-family: "Poetsen One", 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 400;
+    font-family: "Geologica", 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
     font-style: normal;
 }

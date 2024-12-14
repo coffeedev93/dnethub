@@ -28,10 +28,10 @@ export default function LandingContent({ siteConfig }) {
                 Follow along on Twitter
               </Link> */}
                     <div className="py-1.5">&nbsp;</div>
-                    <h1 className="font-heading font-semibold text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+                    <h1 className="dapp-title text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
                         {siteConfig.description}
                     </h1>
-                    <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+                    <p className="max-w-[42rem] font-normal leading-normal text-muted-foreground sm:text-xl sm:leading-8">
                         Use your Hedera Name Service <MonoText>.hbar</MonoText>{" "}
                         identifier as a domain for your web profile just by{" "}
                         adding <MonoText>.im</MonoText> at the end of it.
@@ -69,7 +69,7 @@ export default function LandingContent({ siteConfig }) {
             </section>
             <section
                 id="features"
-                className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
+                className="container space-y-6 bg-transparent py-8 md:py-12 lg:py-24"
             >
                 <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
                     <h2 className="font-heading font-semibold text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
@@ -189,7 +189,7 @@ export default function LandingContent({ siteConfig }) {
             </section>
             <section
                 id="no-extensions"
-                className="container py-8 md:py-12 lg:py-24"
+                className="w-full bg-slate-100 py-8 md:py-12 lg:py-24"
             >
                 <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
                     <h2 className="font-heading font-semibold text-3xl leading-[1.1] sm:text-3xl md:text-6xl">

@@ -1,4 +1,5 @@
 import AppLayout from "@/src/components/common/app-layout";
+import FooterPowered from "@/src/components/common/footer-powered";
 import Profile from "@/src/components/test/profile";
 import SectionCard from "@/src/components/test/section-card";
 
@@ -6,8 +7,9 @@ import SectionCard from "@/src/components/test/section-card";
 export default function SubdomainPage({ params }) {
     const { domain } = params
     return (
-        <AppLayout>
+        <div className="min-h-screen bg-background flex flex-col">
             <Profile id={decodeURIComponent(domain)} />
-		</AppLayout>
+            <FooterPowered />
+		</div>
     );
 }
