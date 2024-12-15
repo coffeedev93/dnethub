@@ -7,6 +7,7 @@ import LandingContent from "./content";
 import LandingNav from "./navbar";
 import LandingFooter from "./footer";
 import ParticlesCanvas from "./particles";
+import ConnectButton from "../common/connect-button";
 
 const siteConfig = {
     name: "WebHub",
@@ -50,18 +51,7 @@ export default function Landing({}) {
                         items={marketingConfig.mainNav}
                     />
                     <nav>
-                        <Link
-                            href="/"
-                            className={cn(
-                                buttonVariants({
-                                    variant: "secondary",
-                                    size: "sm",
-                                }),
-                                "px-4"
-                            )}
-                        >
-                            Connect Wallet
-                        </Link>
+                        {/* <ConnectButton /> */}
                     </nav>
                 </div>
             </header>

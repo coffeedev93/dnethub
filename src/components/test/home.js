@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/src/components/ui/card"
+import { useApp } from "@/src/context"
+import ConnectButton from "../common/connect-button"
 
 // Mock data for wallet info
 const walletInfo = {
@@ -15,6 +17,10 @@ const walletInfo = {
   }
 
 export default function Home({ title = "Landing" }) {
+  const {
+    data: { pairingData, accountData },
+    fn: { connect, disconnect }
+  } = useApp()
 
   return (
     <main className="flex-1 p-6 overflow-auto">
@@ -37,6 +43,28 @@ export default function Home({ title = "Landing" }) {
           </div>
         </CardContent>
       </Card>
+
+      <div className="py-4">
+        {/* <button 
+          onClick={() => connect()}
+          className="bg-teal-100 px-5 py-2"
+        >
+          CONNECT
+        </button>
+        <button 
+          onClick={() => disconnect()}
+          className="bg-red-100 px-5 py-2"
+        >
+          DISCONNECT
+        </button> */}
+        <ConnectButton />
+      </div>
+
+      <div>
+        <pre className="w-full">
+          {JSON.stringify(pairingData, null, 2)}
+        </pre>
+      </div>
 
     </div>
     </main>
