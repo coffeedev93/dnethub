@@ -47,7 +47,7 @@ export default function Profile({ id }) {
     <main className="relative flex-1 p-6 overflow-auto">
       <div class="absolute top-0 left-0 w-full h-48 bg-gradient-to-r from-purple-500 to-pink-500"></div>
     <div className="relative max-w-4xl mx-auto pt-16">
-      <Card className="mb-6">
+      <Card className="mb-6 shadow-md border border-white bg-white rounded-lg">
         {/* <CardHeader>
           <CardTitle className="text-2xl">Profile from <span className="text-teal-400">{id}</span></CardTitle>
           <CardDescription>Overview of your wallet and assets</CardDescription>
@@ -99,7 +99,7 @@ export default function Profile({ id }) {
             <CardDescription>Your ongoing swap transactions</CardDescription>
         </CardHeader> */}
         <CardContent className="p-0">
-                <div className="mb-4 p-4 border rounded-lg bg-white">
+                <div className="mb-4 p-4 shadow-md border border-white bg-white rounded-lg">
                   <div className="flex justify-between items-start">
                     <div className="w-full flex gap-3 items-center">
                       <div>
@@ -113,7 +113,7 @@ export default function Profile({ id }) {
                   </div>
                 </div>
                 
-                <div className="mb-4 p-4 border rounded-lg bg-white">
+                <div className="mb-4 p-4 shadow-md border border-white bg-white rounded-lg">
                   <div className="flex justify-between items-start">
                     <div className="w-full flex gap-3 items-center">
                       <div>
@@ -135,7 +135,7 @@ export default function Profile({ id }) {
               <CardDescription>Send some coins for this profile</CardDescription>
             </CardHeader>
             <CardContent className="px-0">
-              <div className="mb-4 p-4 border rounded-lg bg-white">
+              <div className="mb-4 p-4 shadow-md border border-white bg-white rounded-lg">
                   <div className="flex justify-between items-start">
                     <div className="flex gap-3 items-center">
                       <div>
@@ -155,7 +155,7 @@ export default function Profile({ id }) {
                   </div>
                 </div>
 
-                <div className="mb-4 p-4 border rounded-lg bg-white">
+                <div className="mb-4 p-4 shadow-md border border-white bg-white rounded-lg">
                   <div className="flex justify-between items-start">
                     <div className="flex gap-3 items-center">
                       <div>
