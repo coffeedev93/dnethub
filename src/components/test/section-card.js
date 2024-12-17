@@ -9,16 +9,7 @@ import {
     CardDescription,
 } from "@/src/components/ui/card";
 
-// Mock data for wallet info
-const walletInfo = {
-    address: "0x1234...5678",
-    balance: {
-        ETH: 1.5,
-        USDT: 500,
-        USDC: 750,
-    },
-    nfts: 3,
-};
+
 
 export default function SectionCard({ title = "Landing", description = "" }) {
     return (
@@ -36,14 +27,14 @@ export default function SectionCard({ title = "Landing", description = "" }) {
                                     Wallet Address
                                 </p>
                                 <p className="font-medium">
-                                    {walletInfo.address}
+                                    {"walletInfo.address"}
                                 </p>
                             </div>
                             <div>
                                 <p className="text-sm text-muted-foreground">
                                     NFTs Owned
                                 </p>
-                                <p className="font-medium">{walletInfo.nfts}</p>
+                                <p className="font-medium">{"walletInfo.nfts"}</p>
                             </div>
                         </div>
                     </CardContent>

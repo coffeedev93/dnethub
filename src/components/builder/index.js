@@ -7,12 +7,8 @@ import GeneralInfo from './general-info'
 import SocialLinks from './social-links'
 import WalletAddresses from './wallet-addresses'
 import CustomMediaLinks from './custom-media'
+import SectionCard from '../common/section-card'
 
-const SectionCard = ({ children }) => (
-    <div className="shadow-md border border-white bg-white rounded p-5 my-4">
-        {children}
-    </div>
-)
 
 export default function ProfileBuilder() {
   const [generalInfo, setGeneralInfo] = useState({ name: '', title: '', bio: '' })
@@ -51,9 +47,7 @@ export default function ProfileBuilder() {
 //   )
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-4">
-        <h2 className="text-2xl font-bold mb-4">Profile Builder</h2>
-
+    <div className="w-full mx-auto mt-4">
         <SectionCard>
             <GeneralInfo info={generalInfo} setInfo={setGeneralInfo} />
         </SectionCard>

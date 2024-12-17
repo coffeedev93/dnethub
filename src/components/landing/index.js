@@ -10,7 +10,7 @@ import ParticlesCanvas from "./particles";
 import ConnectButton from "../common/connect-button";
 
 const siteConfig = {
-    name: "WebHub",
+    name: "DNetHub",
     description:
         "The convergence of your Web3 and Web2 identities.",
     url: "https://hbar.im",
@@ -42,7 +42,7 @@ const marketingConfig = {
 // https://github.com/shadcn-ui/taxonomy/tree/main
 export default function Landing({}) {
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className="bg-white flex min-h-screen flex-col">
             <ParticlesCanvas />
             <header className="container z-40 bg-background">
                 <div className="flex h-20 items-center justify-between py-6">

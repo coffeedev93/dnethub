@@ -6,11 +6,11 @@ import "./fonts.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const metadata = {
-    title: "Imhbar",
-    description: "",
+    title: "DNetHub",
+    description: "The convergence of your Web3 and Web2 identities.",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Reddot.svg/603px-Reddot.svg.png?20140718195605",
-    url: `https://imhbar.vercel.app`,
-    sitename: "imhbar",
+    url: `https://hbar.im`,
+    sitename: "dnethub",
 };
 
 export default function RootLayout({ children }) {

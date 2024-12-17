@@ -50,7 +50,7 @@ export default function LandingContent({ siteConfig }) {
                             Get Started
                         </Link>
                         <Link
-                            href={`${protocol}://webhub.${profileHost}`}
+                            href={`${protocol}://dnethub.${profileHost}`}
                             target="_blank"
                             rel="noreferrer"
                             className={cn(
@@ -62,7 +62,7 @@ export default function LandingContent({ siteConfig }) {
                             )}
                         >
                             Try{" "}
-                            <span className="text-pink-500">webhub.hbar.im</span>
+                            <span className="text-pink-500">dnethub.hbar.im</span>
                         </Link>
                     </div>
                 </div>
