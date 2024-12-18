@@ -122,20 +122,6 @@ const AppProvider = (props) => {
         }
     }
 
-    const getCurrentDomainData = async (domain) => {
-        setLoaderMessage("Getting data...");
-        const response = await getDomainData(domain, "data");
-        setLoaderMessage(null);
-        return response;
-    }
-
-    const getCurrentDomainTheme = async (domain) => {
-        setLoaderMessage("Getting data...");
-        const response = await getDomainData(domain, "theme");
-        setLoaderMessage(null);
-        return response;
-    }
-
     const data = {
 		accountData,
         accountNfts,
@@ -147,9 +133,7 @@ const AppProvider = (props) => {
     const fn = {
         connect,
         disconnect,
-        setLoaderMessage,
-        getCurrentDomainData,
-        getCurrentDomainTheme
+        setLoaderMessage
     };
 
     return (

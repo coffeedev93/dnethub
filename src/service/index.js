@@ -1,5 +1,6 @@
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import { pseudoRandId } from "../lib/myutils";
 
 const hederaBaseAPI = "https://testnet.mirrornode.hedera.com";
 
@@ -71,6 +72,16 @@ export async function getNftInfo(tokenId, serialNumber) {
     return response;
 }
 
+export async function getNftCount(tokenId) {
+    const response = await request({
+        _baseURL: hederaBaseAPI,
+        url: `/api/v1/tokens/${tokenId}/nfts/`,
+        fname: 'getNftCount'
+    });
+
+    return response.nfts.length;
+}
+
 // Own API
 export async function getDomainData(
     domain, 
@@ -102,24 +113,50 @@ export async function updateDomainData({domain, data, theme}) {
     }
 }
 
-// async function uploadJson(tokenId, data = null) {
-//     const content = data === null ? getProfileJSON(tokenId) : getPowerupJSON(tokenId, data);
+export async function mintDomainNFT({ipfsUri, receiverId, domain, serial}) {
+    try {
+        const res = await fetch(`/api/mint`, {
+            method: "POST",
+            body: JSON.stringify({ ipfsUri, receiverId, domain, serial }),
+        });
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        console.log(error)
+        return {error: true}
+    }
+}
 
-//     const JWT = process.env.NEXT_PUBLIC_PINATA_JWT
-//     const options = {
-//         method: 'POST',
-//         headers: {Authorization: `Bearer ${JWT}`, 'Content-Type': 'application/json'},
-//         body: `{"pinataOptions":{"cidVersion":1},"pinataMetadata":{"name":"${pseudoRandId()}.json"},"pinataContent":${JSON.stringify(content)}}`
-//     };
+export async function uploadJsonMetadata(domain) {
+    const content = {
+        "name": domain,
+        "creator": "DNetHub",
+        "creatorDID": "",
+        "description": "Testnet Hashgraph Name service domain",
+        "image": "bafkreiaqroiamciheiwpzxlsbtak4z6c63egssrhih22vk2kve7z4t3g4e",
+        "type": "image/jpeg",
+        "files": [],
+        "format": "none",
+        "properties": [],
+        "localization": []
+    }
 
-//     try {
-//         const response = await fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', options);
-//         const { IpfsHash } = await response.json();
-//         const tokenUri = `https://${IpfsHash}.ipfs.dweb.link`;
-//         console.log(tokenUri)
-//         return tokenUri;
-//     } catch (error) {
-//         console.error(error);
-//         return null;
-//     }
-// }
+    const JWT = process.env.NEXT_PUBLIC_PINATA_JWT
+    const options = {
+        method: 'POST',
+        headers: {Authorization: `Bearer ${JWT}`, 'Content-Type': 'application/json'},
+        body: `{"pinataOptions":{"cidVersion":1},"pinataMetadata":{"name":"${pseudoRandId()}.json"},"pinataContent":${JSON.stringify(content)}}`
+    };
+
+    try {
+        const response = await fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', options);
+        const { IpfsHash } = await response.json();
+        const tokenUri = `https://gateway.pinata.cloud/ipfs/${IpfsHash}`;
+        const ipfsUri = `ipfs://${IpfsHash}`;
+        console.log(tokenUri, IpfsHash)
+        return ipfsUri;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}

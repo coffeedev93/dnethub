@@ -1,6 +1,6 @@
-const Loader = () => (
-    <div className="py-5 text-blue-500">
-        Loading...
+const Loader = ({ text = "Loading..." }) => (
+    <div className="py-5 text-pink-600">
+        {text}
     </div>
 );
 

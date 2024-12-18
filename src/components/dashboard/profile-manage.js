@@ -25,7 +25,7 @@ export default function ProfileManage() {
         const response = await getDomainData(domain, "data");
         setLoaderMessage(null);
         if (!response.error) {
-            const val = response.data === null ? {} : response.data.data;
+            const val = response.data === null ? {} : response.data.data === null ? {} : response.data.data;
             setProfileData(val);
         }
         else {

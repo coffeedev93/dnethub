@@ -19,8 +19,8 @@ const cards = [
     "rounded-md bg-gray-100",
     "shadow-md border border border-gray-100 bg-white",
     "rounded-md shadow-md border border-gray-100 bg-white",
-    "border border-black shadow-md shadow-black",
-    "rounded-md border border-black shadow-md shadow-black",
+    "border border-black shadow-md shadow-black bg-white",
+    "rounded-md border border-black shadow-md shadow-black bg-white",
 ]
 
 export default function ProfileTheme() { 
@@ -39,6 +39,7 @@ export default function ProfileTheme() {
         setLoaderMessage(null);
         if (!response.error) {
             if (response.data !== null) {
+                if (response.data.theme === null) return;
                 const { selectedBanner:banner, selectedCard:card } = response.data.theme;
                 setSelectedCard(card)
                 setSelectedBanner(banner)

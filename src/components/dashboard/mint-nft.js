@@ -1,18 +1,21 @@
-import { getDomainData } from "@/src/service";
+import { useApp } from "@/src/context";
+import { getDomainData, getNftCount, mintDomainNFT, uploadJsonMetadata } from "@/src/service";
 import { useRef, useState } from "react";
 
 export default function MintNftDomain() { 
     const [isLoading, setIsLoading] = useState(false);
     const [isAvailable, setIsAvailable] = useState(false);
-    const [searchStr, setSearchStr] = useState("");
+    const [domainName, setDomainName] = useState("");
     const searchInput = useRef();
+
+    const { data: {pairingData} } = useApp();
     
     const checkDomain = async () => {
         const sname = searchInput.current.value;
 
         if (sname.trim() === "") {
             isAvailable(false);
-            setSearchStr("")
+            setDomainName("")
             return;
         }
 
@@ -28,8 +31,31 @@ export default function MintNftDomain() {
             setIsAvailable(false);
         }
 
-        setSearchStr(domain);
+        setDomainName(domain);
         setIsLoading(false);
+    }
+
+    const mintDomain = async () => {
+        // const receiverId = "0.0.5286313"
+        // const ipfsUri = "ipfs://bafkreicuycejsc7ji67tyutj4ilhxzgav344j6xaytikoud33b4yuv4ddy"
+
+        isLoading(true)
+        const ipfsUri = await uploadJsonMetadata(domainName);
+        console.log(ipfsUri)
+
+        const receiverId = pairingData.accountIds[0];
+        const domain = domainName;
+        const serial = await getNftCount("0.0.5285901");
+        const response = await mintDomainNFT({ 
+            ipfsUri, 
+            receiverId, 
+            domain, 
+            serial: serial + 1
+        });
+
+        isLoading(false)
+        console.log(response)
+        alert("Domain created!")
     }
 
     return (
@@ -54,21 +80,24 @@ export default function MintNftDomain() {
                 </button>
             </div>
             {
-                isLoading && <div className="mb-4 text-gray-500">Loading info...</div>
-            }
-            {
                 !isAvailable ? (
                     <div className="w-full bg-red-100 border border-red-300 px-3 py-1 rounded-md">
-                        <div>Domain <span className="font-semibold">{searchStr}</span> not Available!</div>
+                        <div>Domain <span className="font-semibold">{domainName}</span> not Available!</div>
                     </div>
                 ) : (
                     <div className="flex justify-between items-center w-full bg-teal-100 border border-teal-300 px-3 py-1 rounded-md">
-                        <div>The Domain <span className="font-semibold">{searchStr}</span>  is Available!</div>
-                        <button className="py-1 px-2 text-white bg-teal-500 rounded-md">
+                        <div>The Domain <span className="font-semibold">{domainName}</span>  is Available!</div>
+                        <button 
+                            className="py-1 px-2 text-white bg-teal-500 rounded-md"
+                            onClick={() => mintDomain()}
+                        >
                             Get Domain NFT
                         </button>
                     </div>
                 )
+            }
+            {
+                isLoading && <div className="mb-4 text-gray-500">Working...</div>
             }
         </>
     )
