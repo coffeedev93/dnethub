@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 
 import { HashConnect, HashConnectConnectionState } from "hashconnect";
 import { LedgerId } from "@hashgraph/sdk";
-import { getAccountInfo, getAccountNfts } from "./service";
+import { getAccountInfo, getAccountNfts, getDomainData } from "./service";
 import { AUTHORIZED_COLLECTIONS, sleep } from "./lib/myutils";
 
 
@@ -23,6 +23,7 @@ const AppProvider = (props) => {
 	const [accountNfts, setAccountNfts] = useState(null);
     const [pairingData, setPairingData] = useState(null);
     const [loaderMessage, setLoaderMessage] = useState(null);
+    const [currentDomainData, setCurrentDomainData] = useState(null);
 
     const [hashconnect, setHashconnect] = useState(null);
     const [connectionStatus, setConnectionStatus] = useState(
@@ -34,6 +35,8 @@ const AppProvider = (props) => {
     }, []);
 
 	useEffect(() => {
+        if (!pairingData) return;
+
 		if (accountData === null)
 			getAccountData();
 	}, [pairingData])
@@ -54,6 +57,7 @@ const AppProvider = (props) => {
 
         hashconnect.disconnectionEvent.on((data) => {
             setPairingData(null);
+            setAccountNfts(null);
         });
 
         hashconnect.connectionStatusChangeEvent.on((connectionStatus) => {
@@ -75,13 +79,16 @@ const AppProvider = (props) => {
     };
 
     const getAccountData = async () => {
+        console.log("getting nfts...")
         try {
-            const accountId = "0.0.5280976" // account with demo nfts
-            //const accountId = pairingData.accountIds[0];
+            //const accountId = "0.0.5280976" // account with demo nfts
+            const accountId = pairingData.accountIds[0];
             const _accountInfo = null //await getAccountInfo(accountId);
             const _accountNfts = await getAccountNfts(accountId);
 
             const filteredItems = _accountNfts.nfts.filter(t => AUTHORIZED_COLLECTIONS.includes(t.token_id))
+
+            if (filteredItems.length === 0) return;
 
             let result = [];
             let len = filteredItems.length;
@@ -115,6 +122,20 @@ const AppProvider = (props) => {
         }
     }
 
+    const getCurrentDomainData = async (domain) => {
+        setLoaderMessage("Getting data...");
+        const response = await getDomainData(domain, "data");
+        setLoaderMessage(null);
+        return response;
+    }
+
+    const getCurrentDomainTheme = async (domain) => {
+        setLoaderMessage("Getting data...");
+        const response = await getDomainData(domain, "theme");
+        setLoaderMessage(null);
+        return response;
+    }
+
     const data = {
 		accountData,
         accountNfts,
@@ -127,6 +148,8 @@ const AppProvider = (props) => {
         connect,
         disconnect,
         setLoaderMessage,
+        getCurrentDomainData,
+        getCurrentDomainTheme
     };
 
     return (

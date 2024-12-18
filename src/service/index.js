@@ -71,6 +71,37 @@ export async function getNftInfo(tokenId, serialNumber) {
     return response;
 }
 
+// Own API
+export async function getDomainData(
+    domain, 
+    cols = "domain, data, theme"
+) {
+    try {
+        const res = await fetch(`/api/domain?d=${domain}&c=${cols}`, {
+            method: "GET"
+        });
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        console.log(error)
+        return {error: true}
+    }    
+}
+
+export async function updateDomainData({domain, data, theme}) {
+    try {
+        const res = await fetch(`/api/domain`, {
+            method: "POST",
+            body: JSON.stringify({ domain, data, theme }),
+        });
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        console.log(error)
+        return {error: true}
+    }
+}
+
 // async function uploadJson(tokenId, data = null) {
 //     const content = data === null ? getProfileJSON(tokenId) : getPowerupJSON(tokenId, data);
 

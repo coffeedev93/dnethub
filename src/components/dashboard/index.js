@@ -1,5 +1,6 @@
 import { useApp } from "@/src/context";
 import DomainCard from "./domain-card";
+import MintNftDomain from "./mint-nft";
 
 export default function Dashboard() {
     const {
@@ -14,6 +15,9 @@ export default function Dashboard() {
                     accountNfts.map((data, i) => (
                         <DomainCard key={i} data={data} />
                     ))}
+            </div>
+            <div className="py-5">
+                <MintNftDomain />
             </div>
         </div>
     );

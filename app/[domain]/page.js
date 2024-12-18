@@ -1,6 +1,6 @@
 import AppLayout from "@/src/components/common/app-layout";
 import FooterPowered from "@/src/components/common/footer-powered";
-import Profile from "@/src/components/test/profile";
+import Profile from "@/src/components/test/profile_test";
 import SectionCard from "@/src/components/test/section-card";
 
 

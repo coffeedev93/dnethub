@@ -1,6 +1,7 @@
 import Link from "next/link";
 import NavMenu from "./nav-menu";
 import ConnectButton from "../common/connect-button";
+import FullLoader from "../common/full-loader";
 
 
 function Header() {
@@ -57,6 +58,8 @@ const DashboardLayout = ({ children, withSidebar = true }) => {
                     </div>
                 )
             }
+
+            <FullLoader />
         </div>
     );
 }

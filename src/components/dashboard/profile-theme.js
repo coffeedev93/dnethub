@@ -1,7 +1,9 @@
 import { useParams } from "next/navigation";
 import SectionCard from "../common/section-card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { useApp } from "@/src/context";
+import { getDomainData, updateDomainData } from "@/src/service";
 
 const banners = [
     "bg-gradient-to-r from-cyan-500 to-blue-500",
@@ -22,15 +24,43 @@ const cards = [
 ]
 
 export default function ProfileTheme() { 
+    const { fn: { setLoaderMessage } } = useApp();
     const { domain } = useParams();
     const [selectedCard, setSelectedCard] = useState(cards[0]);
     const [selectedBanner, setSelectedBanner] = useState(banners[0]);
 
+    useEffect(() => {
+        init();
+    }, [])
+
+    const init = async () => {
+        setLoaderMessage("Getting data...");
+        const response = await getDomainData(domain, "theme");
+        setLoaderMessage(null);
+        if (!response.error) {
+            if (response.data !== null) {
+                const { selectedBanner:banner, selectedCard:card } = response.data.theme;
+                setSelectedCard(card)
+                setSelectedBanner(banner)
+            }
+        }
+        else {
+            console.log("error")
+        }
+    }
+
     const handleSubmit = async () => {
-        console.log({
-            selectedBanner,
-            selectedCard
-        })
+        setLoaderMessage("Updating values...")
+        const result = await updateDomainData({
+            domain,
+            theme: { selectedBanner, selectedCard },
+            data: null
+        });
+        setLoaderMessage(null)
+
+        if (result.error) {
+            alert("There was an error while updating!")
+        }
     }
 
     const isSelected = (val, current) => {
