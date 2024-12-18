@@ -16,7 +16,7 @@ export default function OnboardPage({ params }) {
         <DashboardLayout>
 			<div className="w-full mx-auto pt-4">
                 <h2 className="text-2xl font-bold mb-4">
-                    Profile for <span className="text-pink-500">{params.domain}</span>
+                    Profile for <span className="text-pink-600">{params.domain}</span>
                     <a
                         href={`${protocol}://${params.domain.split('.')[0]}.${profileHost}`}
                         target="_blank"

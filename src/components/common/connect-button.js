@@ -8,7 +8,7 @@ const ConnectButton = () => {
     } = useApp()
 
     const handleClick = async () => {
-        if (connectionStatus === HashConnectConnectionState.Paired) {
+        if (connectionStatus !== HashConnectConnectionState.Paired) {
             connect();
         }
         else {

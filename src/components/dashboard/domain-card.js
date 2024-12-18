@@ -11,37 +11,47 @@ import { getUrlComponents } from "@/src/lib/myutils";
 
 
 
-export default function DomainCard({ domain }) {
+export default function DomainCard({ data }) {
     const {
         protocol,
         rootHost,
         profileHost
     } = getUrlComponents();
 
+    const {
+        serial_number,
+        token_id,
+        data: {
+            name:domain,
+            creator,
+            image,
+            description
+        }
+    } = data;
+
     return (
         <Card>
             <CardHeader>
                 <CardTitle className="text-2xl">
                     <Link href={`${protocol}://app.${rootHost}/manage/${domain}`}>
-                        {domain}
+                        <span className="text-pink-600">{domain}</span>
                     </Link>
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-2">
                     <div>
                         <p className="text-sm text-muted-foreground">
-                            NFT Collection
-                        </p>
-                        <p className="font-medium">
-                            {"0x1234...5678"}
+                            Serial #{serial_number}
                         </p>
                     </div>
                     <div>
-                        <p className="text-sm text-muted-foreground">
-                            Serial #
+                        <p className="font-semibold text-sm text-muted-foreground">
+                            NFT Collection
                         </p>
-                        <p className="font-medium">{5}</p>
+                        <p className="font-normal text-sm">
+                            {description}
+                        </p>
                     </div>
                 </div>
             </CardContent>

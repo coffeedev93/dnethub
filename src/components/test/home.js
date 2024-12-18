@@ -62,7 +62,7 @@ export default function Home({ title = "Landing" }) {
 
       <div>
         <pre className="w-full">
-          {JSON.stringify(pairingData, null, 2)}
+          {JSON.stringify(accountData, null, 2)}
         </pre>
       </div>
 

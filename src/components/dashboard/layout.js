@@ -12,7 +12,7 @@ function Header() {
                         <div className="flex">
                             {/* <img /> */}
                             <p className="font-sans text-2xl font-bold text-gray-900">
-                                DNET<span className="text-pink-500">HUB</span>
+                                DNET<span className="text-pink-600">HUB</span>
                             </p>
                         </div>
                     </Link>

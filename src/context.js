@@ -3,10 +3,11 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { HashConnect, HashConnectConnectionState } from "hashconnect";
 import { LedgerId } from "@hashgraph/sdk";
 import { getAccountInfo, getAccountNfts } from "./service";
+import { AUTHORIZED_COLLECTIONS, sleep } from "./lib/myutils";
 
 
 const appMetadata = {
-    name: "Webhub",
+    name: "DNetHub",
     description: "Use your HNS domains in Web2",
     icons: [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Reddot.svg/603px-Reddot.svg.png?20140718195605",
@@ -18,7 +19,8 @@ const DataContext = createContext();
 export const useApp = () => useContext(DataContext);
 
 const AppProvider = (props) => {
-	const [accountData, setAccountData] = useState(null);
+    const [accountData, setAccountData] = useState(null);
+	const [accountNfts, setAccountNfts] = useState(null);
     const [pairingData, setPairingData] = useState(null);
     const [loaderMessage, setLoaderMessage] = useState(null);
 
@@ -31,10 +33,10 @@ const AppProvider = (props) => {
         init();
     }, []);
 
-	// useEffect(() => {
-	// 	if (accountData === null)
-	// 		getAccountData();
-	// }, [pairingData])
+	useEffect(() => {
+		if (accountData === null)
+			getAccountData();
+	}, [pairingData])
 
     const init = async () => {
         //create the hashconnect instance
@@ -72,39 +74,50 @@ const AppProvider = (props) => {
         await hashconnect.openPairingModal();
     };
 
-    const updateUIValues = async () => {
-        console.log("fn updateUIValues");
-    };
+    const getAccountData = async () => {
+        try {
+            const accountId = "0.0.5280976" // account with demo nfts
+            //const accountId = pairingData.accountIds[0];
+            const _accountInfo = null //await getAccountInfo(accountId);
+            const _accountNfts = await getAccountNfts(accountId);
 
-	const getAccountData = async () => {
-		// const network = currentNetwork;
-		// const topic = walletService.saveData.topic;
-		const accountId = pairingData.accountIds[0];
+            const filteredItems = _accountNfts.nfts.filter(t => AUTHORIZED_COLLECTIONS.includes(t.token_id))
 
-		// const provider = walletService.hashconnect.getProvider(network, topic, accountId);
-		// const signer = walletService.hashconnect.getSigner(provider);
-		// setSigner(signer);
-		// setProvider(provider);
+            let result = [];
+            let len = filteredItems.length;
+            let count = 0;
 
-		const _accountInfo = await getAccountInfo(accountId);
-		//setAccountInfo(_accountInfo);
+            const fn = async () => {
+                const item = filteredItems[count];
+                const metadataIpfs = atob(item.metadata);
+                const ipfsHash = metadataIpfs.replace("ipfs://", "");
 
-		const _accountNfts = await getAccountNfts(accountId);
-		//setAccountNfts(_accountNfts);
+                const response = await fetch(`https://${ipfsHash}.ipfs.dweb.link`);
+                const data = await response.json();
 
-		// const _accountTokens = _accountInfo.balance.tokens.map(t => getTokenInfo(t.token_id))
-		// Promise.all(_accountTokens).then(result => {
-		// 	setAccountTokens(result)
-		// })
-		
-		setAccountData({
-			info: _accountInfo,
-			nfts: _accountNfts
-		})
-	}
+                result[count] = { ...item, data }
+                count++;
+                await sleep(100)
+
+                if (count < len) {
+                    await fn();
+                } else {
+                    return;
+                }
+            };
+
+            await fn();
+            console.log(result)
+            setAccountNfts(result);
+
+        } catch (error) {
+            console.log("An error ocurred in getAccountData", error);
+        }
+    }
 
     const data = {
 		accountData,
+        accountNfts,
         pairingData,
         connectionStatus,
         loaderMessage,

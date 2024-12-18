@@ -17,6 +17,8 @@ export const getUrlComponents = () => {
     }
 }
 
+export const AUTHORIZED_COLLECTIONS = ["0.0.5280977"]
+
 // gets an id string like the ones in Firebase
 export const pseudoRandId = () => {
     const CHARS =

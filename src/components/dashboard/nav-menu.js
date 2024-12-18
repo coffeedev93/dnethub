@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getUrlComponents } from "@/src/lib/myutils";
-import { IconDiamond, IconGraph, IconHome, IconPaint, IconShip, IconUserCode } from "@tabler/icons-react";
+import { IconDiamond, IconGraph, IconHome, IconPaint, IconShip, IconUserCode, IconWindowMaximize, IconWorldWww } from "@tabler/icons-react";
 import { useParams } from "next/navigation";
 
 
@@ -21,7 +21,7 @@ const NavMenu = () => {
                 href={`${protocol}://app.${rootHost}/manage/${domain}`}
                 className={linkClass}
             >
-                <IconHome className="w-5 h-5" />
+                <IconUserCode className="w-5 h-5" />
                 <span>Profile</span>
             </Link>
             <Link 
@@ -35,24 +35,26 @@ const NavMenu = () => {
                 href={`${protocol}://app.${rootHost}`}
                 className={linkClass}
             >
-                <IconGraph className="w-5 h-5" />
-                <span>Analytics</span>
+                <IconWorldWww className="w-5 h-5" />
+                <span>Domains</span>
             </Link>
-            <Link 
+            {domain && (
+                <Link 
+                    href={`${protocol}://${domain.split(".")[0]}.${profileHost}`}
+                    target="_blank"
+                    className={linkClass}
+                >
+                    <IconWindowMaximize className="w-5 h-5" />
+                    <span>My Page</span>
+                </Link>
+            )}
+            {/* <Link 
                 href={`${protocol}://app.${rootHost}/onboard/`}
                 className={linkClass}
             >
                 <IconShip className="w-5 h-5" />
                 <span>Onboard</span>
-            </Link>
-            <Link 
-                href={`${protocol}://dnethub.${profileHost}`}
-                target="_blank"
-                className={linkClass}
-            >
-                <IconUserCode className="w-5 h-5" />
-                <span>My Profile</span>
-            </Link>
+            </Link> */}
             <Link 
                 href={`${protocol}://${profileHost}`}
                 target="_blank"

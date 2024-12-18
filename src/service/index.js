@@ -70,3 +70,25 @@ export async function getNftInfo(tokenId, serialNumber) {
 
     return response;
 }
+
+// async function uploadJson(tokenId, data = null) {
+//     const content = data === null ? getProfileJSON(tokenId) : getPowerupJSON(tokenId, data);
+
+//     const JWT = process.env.NEXT_PUBLIC_PINATA_JWT
+//     const options = {
+//         method: 'POST',
+//         headers: {Authorization: `Bearer ${JWT}`, 'Content-Type': 'application/json'},
+//         body: `{"pinataOptions":{"cidVersion":1},"pinataMetadata":{"name":"${pseudoRandId()}.json"},"pinataContent":${JSON.stringify(content)}}`
+//     };
+
+//     try {
+//         const response = await fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', options);
+//         const { IpfsHash } = await response.json();
+//         const tokenUri = `https://${IpfsHash}.ipfs.dweb.link`;
+//         console.log(tokenUri)
+//         return tokenUri;
+//     } catch (error) {
+//         console.error(error);
+//         return null;
+//     }
+// }
