@@ -12,7 +12,7 @@ const FooterPowered = () => (
                         rel="noreferrer"
                         className="font-bold text-pink-500"
                     >
-                        <span>Webhub</span> <IconDrone className="inline"/>
+                        <span>DNetHub</span> <IconDrone className="inline"/>
                     </a>
                 </p>
             </div>
