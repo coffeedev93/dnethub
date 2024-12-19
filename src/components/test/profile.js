@@ -65,14 +65,13 @@ export default function Profile({ id }) {
   const [loading, setLoading] = useState(true);
   const [validData, setValidData] = useState(false);
   const [data, setData] = useState({});
-  const [theme, setTheme] = useState({});
+  const [theme, setTheme] = useState({ selectedBanner: "", selectedCard: "" });
+  const [socialLinks, setSocialLinks] = useState({})
 
   useEffect(() => {
     //console.log(domain)
     init()
   }, []);
-
-  const socialLinks = getSocialLinks();
 
   const init = async () => {
     const domain = `${id.split(".")[0]}.hbar`;
@@ -80,9 +79,18 @@ export default function Profile({ id }) {
     if (response.data === null) {
       setValidData(false)
     }
+    else if (
+      response.data.data === null ||
+      response.data.theme === null
+    ) {
+      setValidData(false)
+    }
     else {
       setData(response.data.data)
       setTheme(response.data.theme)
+
+      const _socialLinks = getSocialLinks(response.data.data);
+      setSocialLinks(_socialLinks)
       setValidData(true);
     }
 
@@ -104,12 +112,16 @@ export default function Profile({ id }) {
               ></div>
               <div className="relative max-w-4xl mx-auto pt-16">
                 <div className={`p-4 mb-6 ${theme.selectedCard}`}>
-                  <div className="flex gap-4">
-                    <img src={mainImage} className="w-48 h-48 rounded-md" />
+                  <div className="flex gap-4 justify-center items-center">
+                    {/* <div className="w-48 h-48 rounded-md flex flex-col "> */}
+                      <img src={mainImage} className="w-48 h-48 rounded-md" />
+                      {/* <small className="text-gray-500">{`${id.split(".")[0]}.hbar`}</small> */}
+                    {/* </div> */}
+                    
                     <div className="">
                       <div>
                         <p className="font-bold text-3xl">
-                          {data.generalInfo.name}
+                          {data.generalInfo.name} 
                         </p>
                       </div>
                       <div className="flex items-center gap-3 my-2 text-gray-500">
@@ -197,9 +209,9 @@ export default function Profile({ id }) {
               </div>
             </main>
           ) : (
-            <div className="flex flex-col items-center justify-center h-screen">
+            <div className="flex flex-col items-center justify-center pt-36 pb-16">
               <DeployingSVG className="h-64" />
-              <h1 className="font-bold text-3xl mt-16">
+              <h1 className="font-bold text-3xl">
                 The site for this domain isn't deployed yet!
               </h1>
             </div>

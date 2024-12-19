@@ -39,7 +39,7 @@ export default function MintNftDomain() {
         // const receiverId = "0.0.5286313"
         // const ipfsUri = "ipfs://bafkreicuycejsc7ji67tyutj4ilhxzgav344j6xaytikoud33b4yuv4ddy"
 
-        isLoading(true)
+        setIsLoading(true)
         const ipfsUri = await uploadJsonMetadata(domainName);
         console.log(ipfsUri)
 
@@ -53,7 +53,7 @@ export default function MintNftDomain() {
             serial: serial + 1
         });
 
-        isLoading(false)
+        setIsLoading(false)
         console.log(response)
         alert("Domain created!")
     }
@@ -97,7 +97,7 @@ export default function MintNftDomain() {
                 )
             }
             {
-                isLoading && <div className="mb-4 text-gray-500">Working...</div>
+                isLoading && <div className="my-4 text-gray-500">Working...</div>
             }
         </>
     )
