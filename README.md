@@ -21,8 +21,7 @@ First you'll need to install the Hashpack wallet and create a Testnet account, t
 
 Now you will mint a Tesnet Domain NFT, first of all search for an available name and then proceed to mint (this could take 20-30 sec). The token will be airdropped to your wallet and after refreshing the page it will appear in the dashboard.
 
-
-
+In this step you can access to the domain administration to add data and theme your page, be sure to save your changes to make it availables.
 
 ## Future Plans
 - Integration on Mainnet with the Hedera Name Service (HNS) to assign domains {name}.hbar.im, {name}.cream.co.im and {name}.boo.co.im for domains holders in our dApp
